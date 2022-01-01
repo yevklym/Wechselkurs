@@ -1,11 +1,19 @@
 package yk.wechselkurs;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CurrencyModel {
+
+    @SerializedName("base_code")
     private String baseCurrency;
+
+    @SerializedName("target_code")
     private String exchangeCurrency;
+
+    @SerializedName("conversion_rate")
     private double rate;
 
     public CurrencyModel(String baseCurrency, String exchangeCurrency, double rate) {
