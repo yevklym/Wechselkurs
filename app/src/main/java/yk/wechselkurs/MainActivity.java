@@ -1,22 +1,23 @@
 package yk.wechselkurs;
 
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +25,6 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    RecyclerView currencyRV;
 
     private ArrayList<CurrencyModel> currencyModelArrayList;
 
@@ -34,7 +34,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        currencyRV = findViewById(R.id.idRVCurrency);
+        //Navigation
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        //AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.currencyRates, R.id.converter).build();
+        NavController navController = Navigation.findNavController(this, R.id.fragment);
+        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+
 
         currencyModelArrayList = new ArrayList<>();
         getRates("EUR", "USD");
@@ -43,14 +49,20 @@ public class MainActivity extends AppCompatActivity {
         getRates("EUR", "CNY");
         currencyModelArrayList.add(new CurrencyModel("EUR", "CZK", 24.88));
 
+        RecyclerView currencyRV;
+
+        currencyRV = findViewById(R.id.RVCurrency);
 
         CurrencyAdapter currencyAdapter = new CurrencyAdapter(this, currencyModelArrayList);
 
-        //android cardview two columns
+        //cardview two columns
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         currencyRV.setLayoutManager(mLayoutManager);
+
         currencyRV.setAdapter(currencyAdapter);
+
     }
+
 
     public void getRates(String baseCurrency, String exchangeCurrency) {
 

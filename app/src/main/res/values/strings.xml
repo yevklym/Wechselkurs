@@ -3,4 +3,10 @@
     <string name="base_currency">EUR</string>
     <string name="exchange_currency">USD</string>
     <string name="rate">1.25</string>
+    <string name="convert_button">Convert</string>
+    <string name="conversion_result">Result</string>
+    <string name="enter_amount">Enter Amount</string>
+    <string name="to">To</string>
+    <string name="from">From</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

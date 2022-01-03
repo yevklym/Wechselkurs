@@ -33,7 +33,6 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.ViewHo
         holder.baseCurrencyTV.setText(model.getBaseCurrency());
         holder.exchangeCurrencyTV.setText("/ " + model.getExchangeCurrency());
         holder.rateTV.setText(String.valueOf(model.getRate()));
-
     }
 
     @Override
@@ -46,10 +45,9 @@ public class CurrencyAdapter extends RecyclerView.Adapter<CurrencyAdapter.ViewHo
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            baseCurrencyTV = itemView.findViewById(R.id.idTVBaseCurrency);
-            exchangeCurrencyTV = itemView.findViewById(R.id.idTVExchangeCurrency);
-            rateTV = itemView.findViewById(R.id.idTVRate);
-
+            baseCurrencyTV = itemView.findViewById(R.id.TVBaseCurrency);
+            exchangeCurrencyTV = itemView.findViewById(R.id.TVExchangeCurrency);
+            rateTV = itemView.findViewById(R.id.TVRate);
         }
     }
 }
