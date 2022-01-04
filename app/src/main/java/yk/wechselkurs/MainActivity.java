@@ -1,6 +1,7 @@
 package yk.wechselkurs;
 
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -11,6 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,8 +32,8 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private ArrayList<CurrencyModel> currencyModelArrayList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +43,17 @@ public class MainActivity extends AppCompatActivity {
 
         //Navigation
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        //AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.currencyRates, R.id.converter).build();
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.currencyRates, R.id.converter).build();
         NavController navController = Navigation.findNavController(this, R.id.fragment);
-        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
 
         currencyModelArrayList = new ArrayList<>();
-        getRates("EUR", "USD");
+/*        getRates("EUR", "USD");
         getRates("USD", "AUD");
         getRates("EUR", "GBP");
-        getRates("EUR", "CNY");
+        getRates("EUR", "CNY");*/
         currencyModelArrayList.add(new CurrencyModel("EUR", "CZK", 24.88));
 
         RecyclerView currencyRV;
@@ -60,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
         currencyRV.setLayoutManager(mLayoutManager);
 
         currencyRV.setAdapter(currencyAdapter);
+
+
+
 
     }
 
@@ -78,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
 //                String rateString = rate.toString();
 //                Log.d("RATE", rateString);
                 currencyModelArrayList.add(new CurrencyModel(baseCurrency, exchangeCurrency, Double.parseDouble(rate.toString())));
+
             }
 
             public void onFailure(Call<JsonObject> call, Throwable t) {

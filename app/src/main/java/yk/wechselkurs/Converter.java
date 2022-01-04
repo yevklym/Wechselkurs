@@ -2,11 +2,15 @@ package yk.wechselkurs;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +53,8 @@ public class Converter extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -58,7 +64,23 @@ public class Converter extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_converter, container, false);
+        // Inflate the layout for this fragmentr
+        //return inflater.inflate(R.layout.fragment_converter, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_converter, container, false);
+        Spinner fromDropdown = (Spinner) view.findViewById(R.id.SPFrom);
+        Spinner toDropdown = (Spinner) view.findViewById(R.id.SPTo);
+        String[] dropDownList = {"USD", "EUR", "GBP", "PLN", "AUD", "CAD"};
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_spinner_item, dropDownList);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        toDropdown.setAdapter(arrayAdapter);
+        fromDropdown.setAdapter(arrayAdapter);
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 }
