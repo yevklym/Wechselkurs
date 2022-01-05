@@ -76,11 +76,11 @@ public class CurrencyRates extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_currency_rates, container, false);
         currencyModelArrayList = new ArrayList<>();
-/*        getRates("EUR", "USD");
+        getRates("EUR", "USD");
         getRates("USD", "AUD");
         getRates("EUR", "GBP");
-        getRates("EUR", "CNY");*/
-        currencyModelArrayList.add(new CurrencyModel("EUR", "CZK", 24.88));
+        getRates("EUR", "CNY");
+        currencyModelArrayList.add(new CurrencyModel("EUR", "CZK", 24.8821));
         RecyclerView currencyRV;
         currencyRV = view.findViewById(R.id.RVCurrency);
 

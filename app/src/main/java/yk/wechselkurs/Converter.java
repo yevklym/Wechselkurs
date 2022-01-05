@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -101,7 +102,6 @@ public class Converter extends Fragment {
         convertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 RetrofitInterface retrofitInterface = RetrofitClient.getRetrofitInstance().create(RetrofitInterface.class);
                 Call<JsonObject> call = retrofitInterface.getData(fromDropdown.getSelectedItem().toString(), toDropdown.getSelectedItem().toString());
 
@@ -110,16 +110,21 @@ public class Converter extends Fragment {
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                         JsonObject res = response.body();
                         JsonPrimitive rate = res.getAsJsonObject().getAsJsonPrimitive("conversion_rate");
-                        double amount = Double.parseDouble(convertAmount.getText().toString());
+
+                        double amount;
+                        try {
+                            amount = Double.parseDouble(convertAmount.getText().toString());
+                        }
+                        catch (NumberFormatException e){
+                            Toast.makeText(getActivity().getBaseContext(), "Falsche Angaben", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         double rateDouble = Double.parseDouble(rate.toString());
                         double result = amount * rateDouble;
                         convertResult.setText(String.valueOf(result));
-//                String rateString = rate.toString();
-//                Log.d("RATE", rateString);
                     }
 
                     public void onFailure(Call<JsonObject> call, Throwable t) {
-                        //Toast.makeText(getApplicationContext(), "An error has occurred", Toast.LENGTH_LONG).show();
                     }
 
                 });
