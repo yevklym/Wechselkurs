@@ -7,11 +7,11 @@
     <fragment
         android:id="@+id/converter"
         android:name="yk.wechselkurs.Converter"
-        android:label="fragment_converter"
+        android:label="Konverter"
         tools:layout="@layout/fragment_converter" />
     <fragment
         android:id="@+id/currencyRates"
         android:name="yk.wechselkurs.CurrencyRates"
-        android:label="fragment_currency_rates"
+        android:label="Wechselkurse"
         tools:layout="@layout/fragment_currency_rates" />
 </navigation>
