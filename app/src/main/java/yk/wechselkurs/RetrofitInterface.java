@@ -13,7 +13,7 @@ public interface RetrofitInterface {
 
     String BASE_URL = "https://v6.exchangerate-api.com/";
 
-    @GET("v6/354898cb44c9e07fcf3f09ac/pair/{baseCurrency}/{exchangeCurrency}")
+    @GET("v6/API_KEY/pair/{baseCurrency}/{exchangeCurrency}")
     Call<JsonObject> getData(@Path("baseCurrency") String baseCurrency,
                                 @Path("exchangeCurrency") String exchangeCurrency);
 }
